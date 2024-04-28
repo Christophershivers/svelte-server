@@ -1,14 +1,8 @@
 <script>
   import PocketBase from "pocketbase";
   import Login from "../lib/Login.svelte"
-  let email = "";
-  let password = "";
-
-  export let form
 
   const pb = new PocketBase("http://127.0.0.1:8090");
-
-  
 </script>
 
 <h1>Welcome to SvelteKit</h1>
