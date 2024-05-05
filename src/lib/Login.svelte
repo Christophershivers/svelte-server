@@ -5,8 +5,25 @@
     let name: string;
     let password: string;
 
+    let recordid = ''
+
     async function login(){
-        await pb.collection('users').authWithPassword(username, password)
+       const user = await pb.collection('users').authWithPassword(username, password)
+
+       const record = await pb.collection('OnlineUsers').getFirstListItem(`userid="${user.record.id}"`, {expand: 'userid'});
+
+       console.log(record)
+
+       const data = {
+            "isonline": true
+        };
+
+        await pb.collection('OnlineUsers').update(record.id, data);
+
+        localStorage.setItem('recordid', record.id);
+
+        recordid = record.id
+       
     }
 
     async function signUp(){
@@ -26,7 +43,14 @@
         
     }
 
-    function signOut(){
+    async function signOut(){
+        const data = {
+            "isonline": false
+        };
+
+        const recordid = localStorage.getItem('recordid')
+        await pb.collection('OnlineUsers').update(recordid, data);
+
         pb.authStore.clear()
     }
 </script>
