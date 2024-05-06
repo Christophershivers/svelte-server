@@ -22,7 +22,7 @@ jobs:
       - name: Deploy on CapRover
         uses: caprover/deploy-from-github@v1.1.2
         with:
-          server: https://newaystudios.com
+          server: https://rov.base-compl.com
           app: 'svelte'
           token: '${{ secrets.APP_TOKEN }}'
           image: 'ghcr.io/christophershivers/sveltekit:latest'
